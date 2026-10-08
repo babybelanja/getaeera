@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{%- assign brand = site.data.brands | where: "slug", page.slug | first -%}
+
+<article class="brand">
+  <header class="brand-hero">
+    <div class="wrap brand-hero__inner reveal">
+      <p class="label">{{ brand.role | default: "Merek" }}</p>
+      <h1 class="display">{{ page.title }}</h1>
+      {%- if page.tagline %}
+      <p class="lead">{{ page.tagline }}</p>
+      {%- endif %}
+    </div>
+    {%- if page.hero_image or brand.image %}
+    <figure class="brand-hero__media">
+      <img src="{{ page.hero_image | default: brand.image | relative_url }}"
+           alt="{{ page.hero_alt | default: brand.image_alt | default: page.title }}"
+           width="1600" height="900" loading="eager" />
+    </figure>
+    {%- endif %}
+  </header>
+
+  <div class="wrap prose reveal">
+    {{ content }}
+  </div>
+
+  <section class="cta-band">
+    <div class="wrap cta-band__inner reveal">
+      <p class="label">Ingin tahu lebih jauh</p>
+      <h2 class="display-sm">Kami senang berbincang.</h2>
+      <a class="link-underline" href="{{ '/#kontak' | relative_url }}">Hubungi kami &rarr;</a>
+    </div>
+  </section>
+</article>

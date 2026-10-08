@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="label">Rumah</p>
+        <p class="site-footer__wordmark">{{ site.title }}</p>
+        <p class="muted">{{ site.tagline }}.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer">
+        {%- for item in site.data.site.nav %}
+        <a href="{{ item.url | relative_url }}">{{ item.label }}</a>
+        {%- endfor %}
+      </nav>
+
+      <div class="site-footer__meta">
+        <p class="label">Kontak</p>
+        <p><a href="mailto:{{ site.data.site.contact.email }}">{{ site.data.site.contact.email }}</a></p>
+        <p class="muted">{{ site.data.site.contact.city }}</p>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="muted">
+        &copy; <span id="year"></span> {{ site.title }}. Bagian dari
+        <a href="{{ site.data.site.umbrella.url }}" target="_blank" rel="noopener">{{ site.data.site.umbrella.name }}</a>.
+      </p>
+    </div>
+  </div>
+</footer>

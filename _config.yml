@@ -1,0 +1,58 @@
+# Site
+title: Aeera
+tagline: Pakaian yang tenang
+description: >-
+  Rumah bagi merek-merek pakaian yang tenang dan bertahan. Sebuah persembahan
+  dari PT Babybelanja Berkah Bersama.
+url: "https://showcase.getaeera.id"
+baseurl: ""
+lang: id
+
+# Build
+markdown: kramdown
+permalink: pretty
+timezone: Asia/Jakarta
+
+collections:
+  brands:
+    output: true
+    permalink: /merek/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "brands"
+    values:
+      layout: "brand"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Sass
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-minifier
+
+jekyll-minifier:
+  remove_comments: true
+  compress_css: true
+  compress_javascript: true
+
+exclude:
+  - README.md
+  - ART-DIRECTION.md
+  - TONE.md
+  - docs
+  - Gemfile
+  - Gemfile.lock
+  - opencode.json
+  - .gitignore
+  - vendor

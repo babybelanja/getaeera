@@ -1,0 +1,33 @@
+// ─────────────────────────────────────────────────────────────
+// Design tokens — the Aesop register
+// Warm neutrals, a single muted ochre, nothing loud.
+// ─────────────────────────────────────────────────────────────
+
+$bg:        #f4f0e8; // parchment
+$bg-soft:   #ebe5d9; // sand
+$bg-deep:   #e3dccd; // stone
+$ink:       #2b2b28; // charcoal
+$ink-soft:  #6b6a63; // secondary
+$rule:      #d8d2c6; // hairline
+$ochre:     #a9843c; // single accent
+
+$font-display: "Fraunces", Georgia, "Times New Roman", serif;
+$font-ui:      "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+$maxw:      76rem;
+$measure:   36rem;
+$gutter:    clamp(1.25rem, 4vw, 3.5rem);
+$section-y: clamp(4.5rem, 12vw, 11rem);
+
+$ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+:root {
+  --bg: #{$bg};
+  --bg-soft: #{$bg-soft};
+  --bg-deep: #{$bg-deep};
+  --ink: #{$ink};
+  --ink-soft: #{$ink-soft};
+  --rule: #{$rule};
+  --ochre: #{$ochre};
+  --measure: #{$measure};
+}

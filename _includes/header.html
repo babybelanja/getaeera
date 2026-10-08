@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}">
+      {{ site.title }}
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="navLinks" aria-label="Utama">
+      {%- for item in site.data.site.nav %}
+      <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+  </div>
+</header>

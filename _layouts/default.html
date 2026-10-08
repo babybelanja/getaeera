@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'id' }}">
+{% include head.html %}
+<body class="page{% if page.body_class %} {{ page.body_class }}{% endif %}">
+  {% include header.html %}
+
+  <main id="konten">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+  {% include analytics.html %}
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    // Hero carousel: slow crossfade. Static first slide when motion is not welcome.
+    var heroCarousel = document.querySelector('[data-hero-carousel]');
+    var heroSlides = document.querySelectorAll('.hero__slide');
+    if (heroCarousel && heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var current = 0, timer = null;
+      var show = function (next) {
+        heroSlides[current].classList.remove('is-active');
+        heroSlides[current].setAttribute('aria-hidden', 'true');
+        current = (next + heroSlides.length) % heroSlides.length;
+        heroSlides[current].classList.add('is-active');
+        heroSlides[current].removeAttribute('aria-hidden');
+      };
+      var start = function () {
+        if (timer) { return; }
+        timer = setInterval(function () { show(current + 1); }, 5500);
+      };
+      var stop = function () { clearInterval(timer); timer = null; };
+
+      start();
+      heroCarousel.addEventListener('mouseenter', stop);
+      heroCarousel.addEventListener('mouseleave', start);
+      heroCarousel.addEventListener('focusin', stop);
+      heroCarousel.addEventListener('focusout', start);
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { stop(); } else { start(); }
+      });
+    }
+
+    // Reseller filter — quiet client-side search; full list shows without JS.
+    var agenFilter = document.getElementById('agenFilter');
+    if (agenFilter) {
+      var agenGroups = Array.prototype.slice.call(document.querySelectorAll('.agen-group'));
+      var agenEmpty = document.getElementById('agenEmpty');
+      agenFilter.addEventListener('input', function () {
+        var q = agenFilter.value.trim().toLowerCase();
+        var any = false;
+        agenGroups.forEach(function (group) {
+          var visible = 0;
+          group.querySelectorAll('.agen-item').forEach(function (item) {
+            var match = item.textContent.toLowerCase().indexOf(q) !== -1;
+            item.hidden = !match;
+            if (match) { visible++; }
+          });
+          group.hidden = visible === 0;
+          if (visible) { any = true; }
+        });
+        if (agenEmpty) { agenEmpty.hidden = any; }
+      });
+    }
+  </script>
+</body>
+</html>

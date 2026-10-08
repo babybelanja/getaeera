@@ -1,0 +1,26 @@
+umbrella:
+  name: PT Babybelanja Berkah Bersama
+  url: https://babybelanja.com
+  city: Bandung
+  region: Jawa Barat
+
+nav:
+  - label: Beranda
+    url: /
+  - label: Aeera
+    url: /merek/aeera/
+  - label: Reseller
+    url: /reseller/
+  - label: Kontak
+    url: /#kontak
+
+contact:
+  whatsapp: "6281234567890"
+  email: halo@getaeera.id
+  city: Bandung, Jawa Barat
+
+social:
+  instagram: https://instagram.com/aeera
+
+analytics:
+  ga_id: G-W999W6SLR3

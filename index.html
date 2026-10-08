@@ -1,0 +1,167 @@
+---
+layout: default
+title: ""
+description: >-
+  Aeera membuat pakaian muslimah yang tenang dan bertahan — bahan yang baik,
+  potongan yang tenang, dan usia pakai yang panjang.
+image: /assets/img/og-image.jpg
+hero_image: /assets/img/slides/slide-01.webp
+---
+
+<!-- HERO (full-bleed, crossfade carousel) -->
+<section class="hero hero--full" data-hero-carousel>
+  <div class="hero__media">
+    <div class="hero__slide is-active">
+      <img src="{{ '/assets/img/slides/slide-01.webp' | relative_url }}"
+           alt="Tiga model memakai koleksi Orelia seri Onyx"
+           width="1920" height="1080" loading="eager" fetchpriority="high" />
+    </div>
+    <div class="hero__slide" aria-hidden="true">
+      <img src="{{ '/assets/img/slides/slide-02.webp' | relative_url }}"
+           alt="Dua model memakai set Orelia seri Onyx"
+           width="1920" height="1080" loading="lazy" />
+    </div>
+    <div class="hero__slide" aria-hidden="true">
+      <img src="{{ '/assets/img/slides/slide-03.webp' | relative_url }}"
+           alt="Model memakai gaun Orelia seri Onyx di luar ruangan"
+           width="1920" height="1080" loading="lazy" />
+    </div>
+    <div class="hero__slide" aria-hidden="true">
+      <img src="{{ '/assets/img/slides/slide-04.webp' | relative_url }}"
+           alt="Model memakai gaun Orelia seri Onyx"
+           width="1920" height="1080" loading="lazy" />
+    </div>
+    <div class="hero__slide" aria-hidden="true">
+      <img src="{{ '/assets/img/slides/slide-05.webp' | relative_url }}"
+           alt="Model memakai set Orelia seri Onyx di taman"
+           width="1920" height="1080" loading="lazy" />
+    </div>
+    <div class="hero__slide" aria-hidden="true">
+      <img src="{{ '/assets/img/slides/slide-06.webp' | relative_url }}"
+           alt="Model memakai set Orelia seri Onyx"
+           width="1920" height="1080" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="hero__scrim"></div>
+
+  <div class="hero__overlay">
+    <div class="wrap">
+      <p class="label reveal">Aeera</p>
+      <h1 class="display hero__title reveal">Pakaian yang <span class="accent">tenang</span>.<br />Dibuat untuk bertahan.</h1>
+      <p class="lead hero__sub reveal">
+        Kami membuat pakaian muslimah yang tidak menuntut perhatian. Hanya bahan yang baik,
+        potongan yang tenang, dan usia pakai yang panjang.
+      </p>
+      <div class="hero__foot reveal">
+        <a class="link-underline" href="{{ '/merek/aeera/' | relative_url }}">Kenali Aeera</a>
+        <a class="link-underline" href="#manifesto">Filosofi kami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap prose reveal">
+    <p class="label">Manifesto</p>
+    <p class="lead">Kami percaya pakaian yang baik tidak berteriak. Ia menemani.</p>
+    <p>
+      Setiap helai kami rancang agar terasa tenang dipakai — tidak ketat, tidak menerawang,
+      tidak menyulitkan. Bahan dipilih karena nyaman, bukan karena murah.
+      Jahitan diselesaikan karena rapi, bukan karena cepat.
+    </p>
+    <p>
+      Yang tersisa adalah pakaian yang dipakai berulang, dicuci berkali-kali, dan tetap pantas.
+      Itulah ukuran kami.
+    </p>
+  </div>
+</section>
+
+<!-- BRAND CHAPTERS -->
+{%- for brand in site.data.brands %}
+<section class="chapter{% if forloop.index == 2 %} chapter--flip{% endif %}">
+  <div class="wrap chapter__grid">
+    <figure class="chapter__media reveal">
+      <img src="{{ brand.image | relative_url }}" alt="{{ brand.image_alt }}" width="1200" height="1500" loading="lazy" />
+    </figure>
+    <div class="chapter__body reveal">
+      <p class="label">{{ brand.role }}</p>
+      <h2>{{ brand.name }}</h2>
+      <p>{{ brand.summary }}</p>
+      {%- if brand.url %}
+      <a class="link-underline" href="{{ brand.url | relative_url }}">Kenali {{ brand.name }} &rarr;</a>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- endfor %}
+
+<!-- CRAFT ESSAY -->
+<section class="craft">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="label">Bahan &amp; Ketelitian</p>
+      <h2 class="display-sm">Tiga hal yang kami rawat</h2>
+      <p class="lead">Sebelum sebuah model masuk koleksi, ia melewati tiga pertanyaan sederhana.</p>
+    </div>
+    <div class="craft__grid">
+      <article class="craft__item reveal">
+        <figure class="craft__media">
+          <img src="{{ '/assets/img/craft-kain.webp' | relative_url }}" alt="Detail kain dan kancing set Orelia" width="1000" height="1000" loading="lazy" />
+        </figure>
+        <p class="label">01 — Kain</p>
+        <h3>Jatuh dengan tenang</h3>
+        <p>
+          Kami memilih kain yang tidak menerawang dan tidak lekat. Nyaman di iklim Indonesia,
+          dan tetap nyaman setelah dicuci berulang kali.
+        </p>
+      </article>
+      <article class="craft__item reveal">
+        <figure class="craft__media">
+          <img src="{{ '/assets/img/craft-jahitan.webp' | relative_url }}" alt="Detail jahitan dan bordir pada kain" width="1000" height="1000" loading="lazy" />
+        </figure>
+        <p class="label">02 — Jahitan</p>
+        <h3>Rapi sampai ke dalam</h3>
+        <p>
+          Sisi dalam pakaian pun layak dikerjakan dengan baik. Kami merapikannya bukan untuk
+          dipamerkan, melainkan agar pakaian bertahan lama.
+        </p>
+      </article>
+      <article class="craft__item reveal">
+        <figure class="craft__media">
+          <img src="{{ '/assets/img/craft-siluet.webp' | relative_url }}" alt="Siluet longgar gaun Orelia" width="1000" height="1000" loading="lazy" />
+        </figure>
+        <p class="label">03 — Siluet</p>
+        <h3>Longgar secukupnya</h3>
+        <p>
+          Potongan yang membebaskan gerak tanpa kehilangan bentuk — tidak membentuk tubuh,
+          tidak pula menghilangkannya.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="contact" id="kontak">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="label">Kontak</p>
+      <h2 class="display-sm">Mari berbincang.</h2>
+      <p class="lead">Untuk pertanyaan produk, kemitraan, atau kunjungan.</p>
+    </div>
+    <div class="contact__grid">
+      <a class="contact__card reveal" href="https://wa.me/{{ site.data.site.contact.whatsapp }}" target="_blank" rel="noopener">
+        <p class="label">WhatsApp</p>
+        <span class="contact__val">Pesan singkat</span>
+        <span class="contact__sub">Balasan pada hari kerja</span>
+      </a>
+      <a class="contact__card reveal" href="mailto:{{ site.data.site.contact.email }}">
+        <p class="label">Email</p>
+        <span class="contact__val">{{ site.data.site.contact.email }}</span>
+        <span class="contact__sub">Kemitraan &amp; pertanyaan umum</span>
+      </a>
+    </div>
+  </div>
+</section>

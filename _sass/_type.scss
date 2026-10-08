@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+// Small-caps label — the quiet wayfinding of the whole site.
+.label {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.display {
+  margin: 0;
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 1.4rem + 5.4vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.display-sm {
+  margin: 0;
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 1.1rem + 2.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3 {
+  font-family: $font-display;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  max-width: var(--measure);
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.prose {
+  max-width: var(--measure);
+
+  p { margin: 0 0 1.4em; }
+  h2 { margin: 2.4em 0 0.6em; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); }
+  h3 { margin: 2em 0 0.5em; font-size: 1.25rem; }
+  em { font-style: italic; }
+  a { border-bottom: 1px solid var(--rule); transition: border-color 0.4s $ease; }
+  a:hover { border-color: var(--ink); }
+}
+
+.link-underline {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--ink);
+  transition: color 0.4s $ease, border-color 0.4s $ease;
+}
+.link-underline:hover { color: var(--ochre); border-color: var(--ochre); }

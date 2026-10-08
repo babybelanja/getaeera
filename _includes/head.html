@@ -1,0 +1,31 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {%- capture page_title -%}
+    {%- if page.title and page.title != "" -%}
+      {%- if page.title == site.title -%}{{ site.title }} — {{ page.tagline | default: site.tagline }}{%- else -%}{{ page.title }} — {{ site.title }}{%- endif -%}
+    {%- else -%}
+      {{ site.title }} — {{ site.tagline }}
+    {%- endif -%}
+  {%- endcapture -%}
+  <title>{{ page_title | strip }}</title>
+  {% seo title=false %}
+  <meta name="theme-color" content="#f4f0e8" />
+  <script>document.documentElement.classList.add('js');</script>
+
+  {% comment %} Favicon: monogram "a" in the warm palette {% endcomment %}
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2b28'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' font-style='italic' fill='%23f4f0e8' text-anchor='middle'%3Ea%3C/text%3E%3C/svg%3E" />
+
+  {% comment %} Fonts: Fraunces (display) + Plus Jakarta Sans (UI) {% endcomment %}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+
+  {%- if page.hero_image %}
+  <link rel="preload" as="image" href="{{ page.hero_image | relative_url }}" />
+  {%- endif %}
+</head>

@@ -1,0 +1,10 @@
+{%- assign ga = site.data.site.analytics.ga_id -%}
+{%- if ga and ga != "" and jekyll.environment == "production" %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '{{ ga }}');
+</script>
+{%- endif %}
