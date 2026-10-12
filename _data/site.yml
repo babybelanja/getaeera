@@ -4,9 +4,14 @@ umbrella:
   city: Bandung
   region: Jawa Barat
 
+# Produk yang ditonjolkan di beranda. Ganti satu nilai ini saat rilis produk baru.
+latest_product: orelia
+
 nav:
   - label: Beranda
     url: /
+  - label: Orelia
+    url: /produk/orelia/
   - label: Aeera
     url: /merek/aeera/
   - label: Reseller

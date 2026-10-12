@@ -407,3 +407,94 @@ a.contact__card:hover { background: var(--bg-soft); }
 .agen-item a:hover { color: var(--ochre); }
 
 .agen-empty { margin-top: 2rem; }
+
+// ── Product page ─────────────────────────────────────────────
+.product-hero { padding-top: clamp(3rem, 8vw, 6rem); }
+.product-hero__inner { max-width: $maxw; }
+.product-hero__inner .display { margin-bottom: 1.5rem; }
+
+.product-hero__media {
+  margin: clamp(2.5rem, 7vw, 5rem) 0 0;
+  background: var(--bg-deep);
+
+  img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+}
+
+.product__body { padding-block: $section-y; }
+
+.product-block {
+  padding-top: 1.5rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--rule);
+}
+
+.swatches {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+}
+
+.swatch { display: flex; align-items: center; gap: 0.6rem; }
+
+.swatch__dot {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  box-shadow: inset 0 0 0 1px rgba($bg, 0.35);
+}
+
+.swatch__name { font-size: 0.9rem; color: var(--ink-soft); }
+
+.table-scroll { overflow-x: auto; }
+
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+
+  th, td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  th {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+}
+
+.size-table__note { margin-top: 1rem; font-size: 0.85rem; }
+
+// ── Latest product (home) ────────────────────────────────────
+.latest-product {
+  padding-block: $section-y;
+  background: var(--bg-soft);
+}
+
+.latest-product__grid {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .latest-product__grid { grid-template-columns: 1fr 1fr; }
+}
+
+.latest-product__media {
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg-deep);
+
+  img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+}
+
+.latest-product__body h2 { margin: 0 0 1rem; font-size: clamp(1.8rem, 1.4rem + 2vw, 2.75rem); }

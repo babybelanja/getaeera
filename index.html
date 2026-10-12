@@ -97,6 +97,27 @@ hero_image: /assets/img/slides/slide-01.webp
 </section>
 {%- endfor %}
 
+<!-- LATEST PRODUCT (config-driven via site.data.site.latest_product) -->
+{%- assign latest = site.data.site.latest_product -%}
+{%- assign product = site.products | where: "slug", latest | first -%}
+{%- if product %}
+<section class="latest-product">
+  <div class="wrap latest-product__grid">
+    <div class="latest-product__body reveal">
+      <p class="label">Produk terbaru</p>
+      <h2>{{ product.title }}</h2>
+      <p>{{ product.tagline }}</p>
+      <a class="link-underline" href="{{ product.url | relative_url }}">Lihat {{ product.title }} &rarr;</a>
+    </div>
+    <figure class="latest-product__media reveal">
+      <img src="{{ product.hero_image | relative_url }}"
+           alt="{{ product.hero_alt | default: product.title }}"
+           width="1200" height="1500" loading="lazy" />
+    </figure>
+  </div>
+</section>
+{%- endif %}
+
 <!-- CRAFT ESSAY -->
 <section class="craft">
   <div class="wrap">

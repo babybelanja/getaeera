@@ -1,0 +1,66 @@
+---
+layout: default
+---
+{%- assign chart = site.data.sizechart[page.size_chart] -%}
+
+<article class="product">
+  <header class="product-hero">
+    <div class="wrap product-hero__inner reveal">
+      {%- if page.series %}<p class="label">{{ page.series }}</p>{% endif %}
+      <h1 class="display display-sm">{{ page.title }}</h1>
+      {%- if page.tagline %}<p class="lead">{{ page.tagline }}</p>{% endif %}
+    </div>
+    {%- if page.hero_image %}
+    <figure class="product-hero__media">
+      <img src="{{ page.hero_image | relative_url }}"
+           alt="{{ page.hero_alt | default: page.title }}"
+           width="1920" height="1080" loading="eager" />
+    </figure>
+    {%- endif %}
+  </header>
+
+  <div class="wrap product__body">
+    {%- if page.colors %}
+    <section class="product-block reveal">
+      <p class="label">Warna</p>
+      <ul class="swatches">
+        {%- for c in page.colors %}
+        <li class="swatch">
+          <span class="swatch__dot" style="background: {{ c.hex }}"></span>
+          <span class="swatch__name">{{ c.name }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if chart %}
+    <section class="product-block reveal">
+      <p class="label">Panduan Ukuran</p>
+      <div class="table-scroll">
+        <table class="size-table">
+          <thead>
+            <tr>{%- for col in chart.columns %}<th>{{ col }}</th>{%- endfor %}</tr>
+          </thead>
+          <tbody>
+            {%- for row in chart.rows %}
+            <tr>{%- for cell in row %}<td>{{ cell }}</td>{%- endfor %}</tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+      </div>
+      {%- if chart.note %}<p class="muted size-table__note">{{ chart.note }}</p>{% endif %}
+    </section>
+    {%- endif %}
+
+    <div class="prose reveal">{{ content }}</div>
+  </div>
+
+  <section class="cta-band">
+    <div class="wrap cta-band__inner reveal">
+      <p class="label">Tertarik</p>
+      <h2 class="display-sm">Tanya atau pesan lewat WhatsApp.</h2>
+      <a class="link-underline" href="https://wa.me/{{ site.data.site.contact.whatsapp }}" target="_blank" rel="noopener">Hubungi kami &rarr;</a>
+    </div>
+  </section>
+</article>

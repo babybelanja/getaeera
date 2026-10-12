@@ -3,9 +3,9 @@
 Plan for a new, premium, Apple/Aesop-register **product showcase** (not a store)
 for Aeera, under the PT Babybelanja Berkah Bersama umbrella.
 
-> **Scope note: this document is the planning record for the `aeera-showcase`
-> project (this repository). The `babybelanja.github.io` site is a separate
-> project and is **not modified** by this plan.**
+> **Scope note: this document is the planning record for the `getaeera` project
+> (this repository). The `babybelanja.github.io` site and the `getaeera.com`
+> PHP store are separate and **not modified** by this plan.**
 
 ---
 
@@ -73,10 +73,10 @@ assets/img/                  # WebP photography
 assets/img/slides/           # hero carousel slides (webp, 16:9)
 Gemfile                      # + jekyll-seo-tag, jekyll-sitemap, jekyll-minifier
 .github/workflows/pages.yml  # GitHub Actions deploy
-CNAME                        # custom domain (showcase.getaeera.id)
+CNAME                        # custom domain (getaeera.id — apex; flip pending DNS)
 ART-DIRECTION.md             # photography brief (deliverable)
 TONE.md                      # copy tone guide (deliverable)
-docs/aeera-showcase-plan.md  # this planning record (excluded from build)
+docs/plan.md                 # this planning record (excluded from build)
 ```
 
 ---
@@ -211,3 +211,46 @@ transactions route off-site (WhatsApp / reseller).
 
 > Note: size-chart measurements, colour names+hex, and reseller details must still be
 > supplied directly (see §11.6) — they are not in the Drive folder.
+
+---
+
+## 13. Hosting model — subdirectory single-site at getaeera.id
+
+**Decision (refined):** one site at **`getaeera.id`** (apex) with products as
+**subdirectory paths** — `/produk/<slug>/` — rather than one repo per product on
+subdomains. One repo, one domain, consolidated SEO.
+
+- **Repo:** `babybelanja/getaeera` (umbrella; renamed from `orelia` ← `aeera-showcase`).
+- **Products:** `products` collection → `permalink: /produk/:name/`,
+  `_layouts/product.html`, `_products/<slug>.md`.
+- **Latest product (config-driven):** `_data/site.yml` → `latest_product: <slug>`.
+  The homepage "Produk terbaru" section and the apex redirect read this one value;
+  change it per launch — no repo/domain settings change.
+- **"Latest" redirect:** apex `getaeera.id` + `www` → 301 `/produk/<latest>/`
+  via a **Cloudflare Redirect Rule** (config field drives links; the redirect
+  needs the edge).
+
+### 13.1 DNS / domain
+- Move `getaeera.id` NS from **Rumahweb → Cloudflare** (Free).
+- Apex `@` → GitHub Pages **A** `185.199.108–111.153` (+ **AAAA**);
+  `www` → `CNAME babybelanja.github.io` (**DNS-only**).
+- Repo `CNAME` → `getaeera.id`; `_config.yml` `url` → `https://getaeera.id`.
+- **Sequencing (avoid downtime):** add DNS **first**, then flip the repo's
+  custom domain. Until then the site stays on `showcase.getaeera.id`.
+- Retire `showcase.getaeera.id` with a 301 → `getaeera.id`.
+
+### 13.2 SEO notes
+- Subdomains are treated as separate sites by Google; subdirectories consolidate
+  authority — hence the subdirectory choice.
+- 301 `showcase → getaeera.id`; add `getaeera.id` to Search Console.
+- Apex-as-redirect is a *moving* target; consider an apex **brand hub** later so
+  `getaeera.id` builds its own authority.
+
+### 13.3 Status
+- [x] Repo renamed → `babybelanja/getaeera`.
+- [x] `products` collection + `_layouts/product.html` + `_products/orelia.md`.
+- [x] `latest_product` config + homepage "Produk terbaru" section.
+- [ ] DNS apex/www on Cloudflare (external).
+- [ ] Flip custom domain `showcase` → `getaeera.id` (after DNS).
+- [ ] Cloudflare redirect: apex/`www` → `/produk/<latest>/`.
+- [ ] Colour names+hex + size-chart data (client).

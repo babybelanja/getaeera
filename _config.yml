@@ -17,8 +17,16 @@ collections:
   brands:
     output: true
     permalink: /merek/:name/
+  products:
+    output: true
+    permalink: /produk/:name/
 
 defaults:
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product"
   - scope:
       path: ""
       type: "brands"

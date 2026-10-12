@@ -1,0 +1,15 @@
+# Panduan ukuran. Isi dengan data resmi sebelum publikasi.
+# Struktur:
+#   <chart-id>:
+#     note: "opsional"
+#     columns: [Ukuran, Lingkar dada, Panjang, Lengan]
+#     rows:
+#       - [S, "…", "…", "…"]
+#
+# Contoh (belum diisi — timpa saat data siap):
+# orelia:
+#   note: "Toleransi ±1–2 cm. Satuan sentimeter."
+#   columns: [Ukuran, Lingkar dada, Panjang badan, Panjang lengan]
+#   rows:
+#     - [S, 96, 92, 56]
+#     - [M, 100, 94, 57]
