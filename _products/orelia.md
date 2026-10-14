@@ -24,24 +24,57 @@ colors:
     hex: "#e7ddcd"
 
 colorways:
+  # Dress
   - name: Sky
     piece: Dress
     palette: [Sky]
     hex: "#94aac7"
-    image: /assets/img/orelia/orelia-sky-dress.webp
+    image: /assets/img/orelia/orelia-dress-sky.webp
     alt: Model memakai Orelia dress warna Sky.
+  - name: Onyx
+    piece: Dress
+    palette: [Onyx]
+    hex: "#2b2b28"
+    image: /assets/img/orelia/orelia-dress-onyx.webp
+    alt: Model memakai Orelia dress warna Onyx.
+  - name: Slate
+    piece: Dress
+    palette: [Slate]
+    hex: "#666a78"
+    image: /assets/img/orelia/orelia-dress-slate.webp
+    alt: Model memakai Orelia dress warna Slate.
+  - name: Azure
+    piece: Dress
+    palette: [Azure]
+    hex: "#5d7395"
+    image: /assets/img/orelia/orelia-dress-azure.webp
+    alt: Model memakai Orelia dress warna Azure.
+  # One Set
+  - name: Sky
+    piece: One Set
+    palette: [Sky]
+    hex: "#94aac7"
+    image: /assets/img/orelia/orelia-oneset-sky.webp
+    alt: Model memakai Orelia one set warna Sky.
   - name: Azure
     piece: One Set
     palette: [Azure]
     hex: "#5d7395"
-    image: /assets/img/orelia/orelia-azure-one-set.webp
+    image: /assets/img/orelia/orelia-oneset-azure.webp
     alt: Model memakai Orelia one set warna Azure.
   - name: Slate
     piece: One Set
     palette: [Slate]
     hex: "#666a78"
-    image: /assets/img/orelia/orelia-slate-one-set.webp
+    image: /assets/img/orelia/orelia-oneset-slate.webp
     alt: Model memakai Orelia one set warna Slate.
+  - name: Onyx
+    piece: One Set
+    palette: [Onyx]
+    hex: "#2b2b28"
+    image: /assets/img/orelia/orelia-oneset-onyx.webp
+    alt: Model memakai Orelia one set warna Onyx.
+  # Mix One Set
   - name: Cream & Sky
     piece: Mix One Set
     palette: [Cream, Sky]

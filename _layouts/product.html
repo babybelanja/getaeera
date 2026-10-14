@@ -67,7 +67,7 @@ layout: default
                       aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
                 <span class="picker__dot" aria-hidden="true"
                       style="{% if c.hex2 %}background: linear-gradient(90deg, {{ c.hex }} 50%, {{ c.hex2 }} 50%){% else %}background: {{ c.hex }}{% endif %}"></span>
-                <span class="picker__label">{{ c.name }}</span>
+                <span class="picker__label">{{ c.name }}<span class="picker__piece">{{ c.piece }}</span></span>
               </button>
             </li>
             {%- endfor %}

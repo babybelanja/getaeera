@@ -162,9 +162,10 @@ transactions route off-site (WhatsApp / reseller).
 - Store as a list in the product front matter:
   `colors: [{ name: Onyx, hex: "#2b2b28" }, …]` and
   `colorways: [{ name, piece, image, alt }, …]`.
-- **Built (colors from client photos):** Onyx, Sky, Azure, Slate, Cream + six
-  colorway photos (Sky dress; Azure/Slate one set; Cream & Sky/Azure/Onyx mix one
-  set). Hex sampled from imagery pending official values.
+- **Built (colors from client photos):** Onyx, Sky, Azure, Slate, Cream + eleven
+  colorway photos — Dress (Sky, Onyx, Slate, Azure), One Set (Sky, Azure, Slate,
+  Onyx), Mix One Set (Cream & Sky/Azure/Onyx). Hex sampled from imagery pending
+  official values.
 - **Interactive viewer:** picker swaps a single large photo (with a slow fade);
   clicking the photo opens a keyboard-accessible lightbox (`Esc`/arrows);
   the palette dots behind the selected colourway pulse (zoom + ochre ring).

@@ -574,6 +574,18 @@ a.contact__card:hover { background: var(--bg-soft); }
   background: rgba($bg-soft, 0.6);
 }
 
+.picker__label { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+
+.picker__piece {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+.picker__btn.is-active .picker__piece { opacity: 0.85; }
+
 .picker__dot {
   width: 1rem;
   height: 1rem;
