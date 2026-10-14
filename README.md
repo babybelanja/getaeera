@@ -22,13 +22,14 @@ _data/sizechart.yml       # panduan ukuran (per produk)
 _includes/                # head, header, footer, analytics
 _layouts/default.html     # shell halaman
 _layouts/brand.html       # halaman "kenali merek"
-_layouts/product.html     # halaman produk (swatch warna, tabel ukuran)
+_layouts/product.html     # halaman produk (swatch warna, galeri warna, tabel ukuran)
 _brands/aeera.md          # konten halaman merek (collection)
 _products/orelia.md       # halaman produk (collection) → /produk/orelia/
 _sass/                    # token, base, tipografi, komponen
 assets/css/main.scss      # meng-@use seluruh partial
 assets/img/               # WebP fotografi
 assets/img/slides/        # slide carousel beranda (16:9)
+assets/img/orelia/        # foto colorway produk Orelia
 index.html                # narasi beranda + produk terbaru (config-driven)
 reseller.html             # /reseller/ — direktori agen
 404.html

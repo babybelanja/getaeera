@@ -158,9 +158,13 @@ transactions route off-site (WhatsApp / reseller).
 - **Source imagery:** shared Google Drive folder "Orelia" (see §12); per-colour photos
   can be pulled from there.
 - Render as small muted swatch dots with labels (hairline ring), no loud fills;
-  optional per-color image.
+  per-color image via a `colorways` gallery (photo, name, piece type).
 - Store as a list in the product front matter:
-  `colors: [{ name: Onyx, hex: "#2b2b28" }, …]`.
+  `colors: [{ name: Onyx, hex: "#2b2b28" }, …]` and
+  `colorways: [{ name, piece, image, alt }, …]`.
+- **Built (colors from client photos):** Onyx, Sky, Azure, Slate, Cream + six
+  colorway photos (Sky dress; Azure/Slate one set; Cream & Sky/Azure/Onyx mix one
+  set). Hex sampled from imagery pending official values.
 
 ### 11.3 Size chart
 
@@ -188,7 +192,8 @@ transactions route off-site (WhatsApp / reseller).
 - [x] **Reseller page built** — `/reseller/`, grouped by city from
   `_data/resellers.yml` (116 agen / 59 kota), each a `wa.me` link, with a quiet
   client-side filter. Added to nav.
-- [ ] Color names + hex (client) — then build `_products/orelia.md`, `_layouts/product.html`, swatches.
+- [x] Colors built — `_products/orelia.md` + `_layouts/product.html` + `_components.scss`
+  (swatches + `colorways` gallery); hex sampled from client photos, official values still welcome.
 - [ ] Size chart measurements + which columns (client) — then `_data/sizechart.yml` + table.
 
 ---
@@ -252,4 +257,5 @@ subdomains. One repo, one domain, consolidated SEO.
 - [x] DNS apex/www via **Rumahweb** (A → GitHub Pages, `www` CNAME) — no Cloudflare.
 - [x] Flip custom domain `showcase` → `getaeera.id` (`CNAME` + `_config.yml`).
 - [ ] Redirect `showcase.getaeera.id` → `getaeera.id` (301 via Rumahweb forwarding).
-- [ ] Colour names+hex + size-chart data (client).
+- [x] Colour names + hex sampled from photos + colorway gallery (official hex pending).
+- [ ] Size-chart data (client).

@@ -34,6 +34,27 @@ layout: default
     </section>
     {%- endif %}
 
+    {%- if page.colorways %}
+    <section class="product-block reveal">
+      <p class="label">Pilihan Warna</p>
+      <ul class="colorways">
+        {%- for c in page.colorways %}
+        <li class="colorway">
+          <figure class="colorway__media">
+            <img src="{{ c.image | relative_url }}"
+                 alt="{{ c.alt | default: c.name }}"
+                 width="1080" height="1350" loading="lazy" />
+          </figure>
+          <div class="colorway__meta">
+            <span class="colorway__name">{{ c.name }}</span>
+            {%- if c.piece %}<span class="colorway__piece">{{ c.piece }}</span>{% endif %}
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
     {%- if chart %}
     <section class="product-block reveal">
       <p class="label">Panduan Ukuran</p>
