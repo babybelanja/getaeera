@@ -165,6 +165,9 @@ transactions route off-site (WhatsApp / reseller).
 - **Built (colors from client photos):** Onyx, Sky, Azure, Slate, Cream + six
   colorway photos (Sky dress; Azure/Slate one set; Cream & Sky/Azure/Onyx mix one
   set). Hex sampled from imagery pending official values.
+- **Interactive viewer:** picker swaps a single large photo (with a slow fade);
+  clicking the photo opens a keyboard-accessible lightbox (`Esc`/arrows);
+  the palette dots behind the selected colourway pulse (zoom + ochre ring).
 
 ### 11.3 Size chart
 

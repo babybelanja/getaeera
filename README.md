@@ -22,7 +22,7 @@ _data/sizechart.yml       # panduan ukuran (per produk)
 _includes/                # head, header, footer, analytics
 _layouts/default.html     # shell halaman
 _layouts/brand.html       # halaman "kenali merek"
-_layouts/product.html     # halaman produk (swatch warna, galeri warna, tabel ukuran)
+_layouts/product.html     # halaman produk (swatch, pemilih warna interaktif + lightbox, tabel ukuran)
 _brands/aeera.md          # konten halaman merek (collection)
 _products/orelia.md       # halaman produk (collection) → /produk/orelia/
 _sass/                    # token, base, tipografi, komponen
