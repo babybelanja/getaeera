@@ -8,8 +8,8 @@ transaksi dialihkan ke WhatsApp / marketplace / situs mitra.
 - Dibangun dengan **Jekyll 4.4**
 - Deploy: **GitHub Actions** (`.github/workflows/pages.yml`) → GitHub Pages
 - Repo: `babybelanja/getaeera`
-- Domain: `getaeera.id` (rencana; saat ini masih dilayani di `showcase.getaeera.id`
-  sampai DNS apex dipasang — lihat `CNAME`)
+- Domain: `getaeera.id` (apex + `www`) — lihat `CNAME`.
+  `showcase.getaeera.id` diarahkan 301 ke apex.
 
 ## Struktur
 
@@ -34,7 +34,7 @@ reseller.html             # /reseller/ — direktori agen
 404.html
 ART-DIRECTION.md          # brief fotografi
 TONE.md                   # panduan nada penulisan
-docs/aeera-showcase-plan.md  # catatan perencanaan (tak dipublikasikan)
+docs/plan.md               # catatan perencanaan (tak dipublikasikan)
 ```
 
 > Produk terbaru di beranda dikendalikan satu nilai: `latest_product` di

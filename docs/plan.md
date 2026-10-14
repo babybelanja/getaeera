@@ -224,18 +224,17 @@ subdomains. One repo, one domain, consolidated SEO.
 - **Products:** `products` collection → `permalink: /produk/:name/`,
   `_layouts/product.html`, `_products/<slug>.md`.
 - **Latest product (config-driven):** `_data/site.yml` → `latest_product: <slug>`.
-  The homepage "Produk terbaru" section and the apex redirect read this one value;
-  change it per launch — no repo/domain settings change.
-- **"Latest" redirect:** apex `getaeera.id` + `www` → 301 `/produk/<latest>/`
-  via a **Cloudflare Redirect Rule** (config field drives links; the redirect
-  needs the edge).
+  The homepage "Produk terbaru" section reads this one value; change it per
+  launch — no repo/domain settings change.
+- **Apex = brand hub:** `getaeera.id` serves the homepage directly (featuring the
+  latest product); no apex redirect needed. Only `showcase.getaeera.id` → 301 → apex.
 
 ### 13.1 DNS / domain
-- Move `getaeera.id` NS from **Rumahweb → Cloudflare** (Free).
-- Apex `@` → GitHub Pages **A** `185.199.108–111.153` (+ **AAAA**);
+- DNS hosted at **Rumahweb** (registrar NS, no Cloudflare needed).
+- Apex `@` → GitHub Pages **A** `185.199.108–111.153` (+ AAAA);
   `www` → `CNAME babybelanja.github.io` (**DNS-only**).
 - Repo `CNAME` → `getaeera.id`; `_config.yml` `url` → `https://getaeera.id`.
-- **Sequencing (avoid downtime):** add DNS **first**, then flip the repo's
+- **Sequencing (avoid downtime):** add DNS first, then flip the repo's
   custom domain. Until then the site stays on `showcase.getaeera.id`.
 - Retire `showcase.getaeera.id` with a 301 → `getaeera.id`.
 
@@ -250,7 +249,7 @@ subdomains. One repo, one domain, consolidated SEO.
 - [x] Repo renamed → `babybelanja/getaeera`.
 - [x] `products` collection + `_layouts/product.html` + `_products/orelia.md`.
 - [x] `latest_product` config + homepage "Produk terbaru" section.
-- [ ] DNS apex/www on Cloudflare (external).
-- [ ] Flip custom domain `showcase` → `getaeera.id` (after DNS).
-- [ ] Cloudflare redirect: apex/`www` → `/produk/<latest>/`.
+- [x] DNS apex/www via **Rumahweb** (A → GitHub Pages, `www` CNAME) — no Cloudflare.
+- [x] Flip custom domain `showcase` → `getaeera.id` (`CNAME` + `_config.yml`).
+- [ ] Redirect `showcase.getaeera.id` → `getaeera.id` (301 via Rumahweb forwarding).
 - [ ] Colour names+hex + size-chart data (client).
