@@ -8,6 +8,11 @@ hero_image: /assets/img/slides/slide-01.webp
 hero_alt: Tiga model memakai koleksi Orelia seri Onyx
 image: /assets/img/og-image.jpg
 size_chart: orelia
+# Jenis — urutan tab "Jenis"; tiap colorway ditandai lewat `piece`.
+types:
+  - Dress
+  - One Set
+  - Mix One Set
 # Warna — `hex` untuk bulatan swatch; `colorways` untuk pemilih foto interaktif.
 #   colorways[].palette = nama warna palet yang menyusun pilihan (untuk pulse).
 #   `hex`/`hex2` = bulatan pilihan (dua warna → belah dua, mis. Cream & Sky).

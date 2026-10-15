@@ -39,24 +39,28 @@ layout: default
   </header>
 
   <div class="wrap product__body">
-    {%- if page.colors %}
-    <section class="product-block reveal">
-      <p class="label">Warna</p>
-      <ul class="swatches" data-swatches>
-        {%- for c in page.colors %}
-        <li class="swatch" data-swatch="{{ c.name }}">
-          <span class="swatch__dot" style="background: {{ c.hex }}"></span>
-          <span class="swatch__name">{{ c.name }}</span>
+    {%- if page.colorways %}
+    {%- assign fallback_types = page.colorways | map: "piece" | uniq -%}
+    {%- assign types = page.types | default: fallback_types -%}
+    {%- assign first_type = types | first -%}
+    {%- if types %}
+    <section class="product-block reveal" data-types>
+      <p class="label">Jenis</p>
+      <ul class="type-tabs" aria-label="Jenis">
+        {%- for t in types %}
+        <li>
+          <button class="type-tab{% if forloop.first %} is-active{% endif %}"
+                  type="button" data-type="{{ t }}"
+                  aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ t }}</button>
         </li>
         {%- endfor %}
       </ul>
     </section>
     {%- endif %}
 
-    {%- if page.colorways %}
     {%- assign first = page.colorways | first %}
     <section class="product-block reveal" data-viewer>
-      <p class="label">Pilihan Warna</p>
+      <p class="label">Warna</p>
 
       <div class="viewer">
         <button class="viewer__stage" type="button" data-viewer-open
@@ -75,7 +79,7 @@ layout: default
           </p>
           <ul class="viewer__picker">
             {%- for c in page.colorways %}
-            <li>
+            <li data-colorway-item data-piece="{{ c.piece }}"{% if c.piece != first_type %} hidden{% endif %}>
               <button class="picker__btn{% if forloop.first %} is-active{% endif %}"
                       type="button" data-colorway
                       data-name="{{ c.name }}"
@@ -86,7 +90,7 @@ layout: default
                       aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
                 <span class="picker__dot" aria-hidden="true"
                       style="{% if c.hex2 %}background: linear-gradient(90deg, {{ c.hex }} 50%, {{ c.hex2 }} 50%){% else %}background: {{ c.hex }}{% endif %}"></span>
-                <span class="picker__label">{{ c.name }}<span class="picker__piece">{{ c.piece }}</span></span>
+                <span class="picker__name">{{ c.name }}</span>
               </button>
             </li>
             {%- endfor %}
@@ -114,33 +118,39 @@ layout: default
         var img = root.querySelector('[data-viewer-img]');
         var nameEl = root.querySelector('[data-viewer-name]');
         var pieceEl = root.querySelector('[data-viewer-piece]');
-        var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-swatch]'));
+        var caption = root.querySelector('.viewer__caption');
+
+        var typesRoot = document.querySelector('[data-types]');
+        var typeTabs = typesRoot ? Array.prototype.slice.call(typesRoot.querySelectorAll('[data-type]')) : [];
+        var items = buttons.map(function (b) { return b.closest('[data-colorway-item]'); });
 
         var lightbox = document.querySelector('[data-lightbox]');
         var lbImg = lightbox && lightbox.querySelector('[data-lightbox-img]');
         var lbCap = lightbox && lightbox.querySelector('[data-lightbox-caption]');
         var lbClose = lightbox && lightbox.querySelector('[data-lightbox-close]');
         var current = 0;
+        var visible = buttons.map(function (b, i) { return i; });
         var lastFocus = null;
-
-        function pulse(palette) {
-          var list = (palette || '').split(',').map(function (s) { return s.trim(); });
-          swatches.forEach(function (s) {
-            s.classList.toggle('is-active', list.indexOf(s.getAttribute('data-swatch')) !== -1);
-          });
-        }
 
         function captionOf(b) {
           var piece = b.getAttribute('data-piece');
-          return piece ? b.getAttribute('data-name') + ' — ' + piece : b.getAttribute('data-name');
+          return piece ? b.getAttribute('data-name') + ' \u2014 ' + piece : b.getAttribute('data-name');
+        }
+
+        function flashCaption() {
+          if (!caption) return;
+          caption.classList.remove('is-swapping');
+          void caption.offsetWidth;
+          caption.classList.add('is-swapping');
         }
 
         function select(index) {
-          current = (index + buttons.length) % buttons.length;
+          current = index;
           var b = buttons[current];
           buttons.forEach(function (btn, i) {
-            btn.classList.toggle('is-active', i === current);
-            btn.setAttribute('aria-pressed', i === current ? 'true' : 'false');
+            var on = i === current;
+            btn.classList.toggle('is-active', on);
+            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
           });
           var src = b.getAttribute('data-image');
           var alt = b.getAttribute('data-alt');
@@ -153,14 +163,36 @@ layout: default
             img.setAttribute('src', src);
           }
           img.setAttribute('alt', alt);
-          nameEl.textContent = b.getAttribute('data-name');
-          pieceEl.textContent = b.getAttribute('data-piece');
-          pulse(b.getAttribute('data-palette'));
+          if (nameEl) nameEl.textContent = b.getAttribute('data-name');
+          if (pieceEl) pieceEl.textContent = b.getAttribute('data-piece');
+          flashCaption();
           if (lightbox && lightbox.classList.contains('is-open')) {
             lbImg.setAttribute('src', src);
             lbImg.setAttribute('alt', alt);
             lbCap.textContent = captionOf(b);
           }
+        }
+
+        function step(dir) {
+          if (!visible.length) return;
+          var pos = visible.indexOf(current);
+          if (pos === -1) pos = 0;
+          select(visible[(pos + dir + visible.length) % visible.length]);
+        }
+
+        function applyType(type) {
+          typeTabs.forEach(function (t) {
+            var on = t.getAttribute('data-type') === type;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          visible = [];
+          buttons.forEach(function (b, i) {
+            var on = !type || b.getAttribute('data-piece') === type;
+            if (items[i]) items[i].hidden = !on;
+            if (on) visible.push(i);
+          });
+          if (visible.length) select(visible[0]);
         }
 
         function openLightbox() {
@@ -187,21 +219,28 @@ layout: default
         buttons.forEach(function (btn, i) {
           btn.addEventListener('click', function () { select(i); });
         });
+        typeTabs.forEach(function (t) {
+          t.addEventListener('click', function () { applyType(t.getAttribute('data-type')); });
+        });
         root.querySelector('[data-viewer-open]').addEventListener('click', openLightbox);
         if (lightbox) {
           lbClose.addEventListener('click', closeLightbox);
-          lightbox.querySelector('[data-lightbox-prev]').addEventListener('click', function () { select(current - 1); });
-          lightbox.querySelector('[data-lightbox-next]').addEventListener('click', function () { select(current + 1); });
+          lightbox.querySelector('[data-lightbox-prev]').addEventListener('click', function () { step(-1); });
+          lightbox.querySelector('[data-lightbox-next]').addEventListener('click', function () { step(1); });
           lightbox.addEventListener('click', function (e) { if (e.target === lightbox) { closeLightbox(); } });
         }
         document.addEventListener('keydown', function (e) {
           if (!lightbox || !lightbox.classList.contains('is-open')) return;
           if (e.key === 'Escape') { closeLightbox(); }
-          if (e.key === 'ArrowLeft') { select(current - 1); }
-          if (e.key === 'ArrowRight') { select(current + 1); }
+          if (e.key === 'ArrowLeft') { step(-1); }
+          if (e.key === 'ArrowRight') { step(1); }
         });
 
-        select(0);
+        if (typeTabs.length) {
+          applyType(typeTabs[0].getAttribute('data-type'));
+        } else {
+          select(0);
+        }
       })();
     </script>
     {%- endif %}
