@@ -16,6 +16,8 @@ nav:
     url: /merek/aeera/
   - label: Reseller
     url: /reseller/
+  - label: Shop
+    url: https://getaeera.com/
   - label: Kontak
     url: /#kontak
 
