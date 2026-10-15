@@ -8,6 +8,9 @@ url: "https://getaeera.id"
 baseurl: ""
 lang: id
 
+# Search Console / webmaster verification (paste the content value from Google)
+google_site_verification: ""
+
 # Build
 markdown: kramdown
 permalink: pretty

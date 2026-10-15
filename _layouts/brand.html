@@ -3,6 +3,23 @@ layout: default
 ---
 {%- assign brand = site.data.brands | where: "slug", page.slug | first -%}
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Brand",
+  "name": {{ page.title | jsonify }},
+  "slogan": {{ page.tagline | jsonify }},
+  "description": {{ page.description | default: site.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "logo": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": {{ site.data.site.umbrella.name | jsonify }},
+    "url": {{ site.data.site.umbrella.url | jsonify }}
+  }
+}
+</script>
+
 <article class="brand">
   <header class="brand-hero">
     <div class="wrap brand-hero__inner reveal">

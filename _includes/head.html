@@ -11,7 +11,42 @@
   <title>{{ page_title | strip }}</title>
   {% seo title=false %}
   <meta name="theme-color" content="#f4f0e8" />
+  {%- if site.google_site_verification and site.google_site_verification != "" %}
+  <meta name="google-site-verification" content="{{ site.google_site_verification }}" />
+  {%- endif %}
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex, follow" />
+  {%- endif %}
   <script>document.documentElement.classList.add('js');</script>
+
+  {% comment %} Entity markup so search engines connect Aeera to its parent group. {% endcomment %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": {{ site.url | append: '/#organization' | jsonify }},
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | append: '/' | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "logo": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+    "image": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+    "email": {{ site.data.site.contact.email | jsonify }},
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": {{ site.data.site.umbrella.city | jsonify }},
+      "addressRegion": {{ site.data.site.umbrella.region | jsonify }},
+      "addressCountry": "ID"
+    },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": {{ site.data.site.umbrella.name | jsonify }},
+      "url": {{ site.data.site.umbrella.url | jsonify }}
+    },
+    "sameAs": [
+      {{ site.data.site.social.instagram | jsonify }}
+    ]
+  }
+  </script>
 
   {% comment %} Favicon: monogram "a" in the warm palette {% endcomment %}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2b28'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' font-style='italic' fill='%23f4f0e8' text-anchor='middle'%3Ea%3C/text%3E%3C/svg%3E" />

@@ -3,6 +3,25 @@ layout: default
 ---
 {%- assign chart = site.data.sizechart[page.size_chart] -%}
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.tagline | default: page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "category": "Pakaian muslimah",
+  "brand": {
+    "@type": "Brand",
+    "name": {{ site.title | jsonify }}
+  },
+  "image": [
+    {{ page.hero_image | absolute_url | jsonify }}{%- assign imgs = page.colorways | map: "image" -%}{%- for img in imgs -%},
+    {{ img | absolute_url | jsonify }}{%- endfor -%}
+  ]
+}
+</script>
+
 <article class="product">
   <header class="product-hero">
     <div class="wrap product-hero__inner reveal">
