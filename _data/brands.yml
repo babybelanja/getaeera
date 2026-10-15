@@ -9,14 +9,3 @@
   image_alt: Model memakai gaun Orelia seri Onyx di luar ruangan
   url: /merek/aeera/
   featured: true
-
-- name: Samuroh
-  slug: samuroh
-  role: Naungan
-  tagline: Distributor pakaian muslimah sejak 2010.
-  summary: >-
-    Samuroh menghubungkan perajin, mitra, dan pelanggan dari Bandung ke seluruh
-    Indonesia — dengan cara yang sederhana dan dapat dipercaya.
-  image: /assets/img/samuroh.webp
-  image_alt: Dua model memakai set Orelia seri Onyx
-  featured: false

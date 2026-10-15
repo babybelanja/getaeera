@@ -80,7 +80,7 @@ hero_image: /assets/img/slides/slide-01.webp
 
 <!-- BRAND CHAPTERS -->
 {%- for brand in site.data.brands %}
-<section class="chapter{% if forloop.index == 2 %} chapter--flip{% endif %}">
+<section class="chapter{% cycle '', ' chapter--flip' %}">
   <div class="wrap chapter__grid">
     <figure class="chapter__media reveal">
       <img src="{{ brand.image | relative_url }}" alt="{{ brand.image_alt }}" width="1200" height="1500" loading="lazy" />
