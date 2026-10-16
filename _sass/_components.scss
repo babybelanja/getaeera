@@ -2,12 +2,21 @@
 
 // ── Header ───────────────────────────────────────────────────
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 50;
-  background: rgba($bg, 0.86);
-  backdrop-filter: saturate(140%) blur(8px);
-  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  backdrop-filter: saturate(140%) blur(0);
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s $ease, backdrop-filter 0.4s $ease, border-color 0.4s $ease;
+
+  &.is-scrolled {
+    background: rgba($bg, 0.86);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom-color: var(--rule);
+  }
 }
 
 .site-header__inner {
@@ -23,6 +32,7 @@
   font-style: italic;
   font-size: 1.4rem;
   letter-spacing: 0.01em;
+  transition: color 0.4s $ease;
 }
 
 .site-nav {
@@ -55,9 +65,18 @@
     display: block;
     height: 1px;
     background: var(--ink);
-    transition: transform 0.4s $ease;
+    transition: transform 0.4s $ease, background-color 0.4s $ease;
   }
   span + span { margin-top: 0.4rem; }
+}
+
+// Over the dark full-bleed hero (home, unscrolled): labels only, in parchment.
+body.home .site-header:not(.is-scrolled) {
+  .wordmark { color: $bg; }
+  .site-nav:not(.open) a { color: rgba($bg, 0.82); }
+  .site-nav:not(.open) a:hover,
+  .site-nav:not(.open) a[aria-current="page"] { color: $bg; }
+  .nav-toggle span { background: $bg; }
 }
 
 @media (max-width: 47.99rem) {

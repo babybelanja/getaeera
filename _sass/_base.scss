@@ -7,7 +7,12 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
 }
+
+// Content clears the fixed header; the home hero runs full-bleed behind it.
+main { padding-top: var(--header-h); }
+body.home main { padding-top: 0; }
 
 body {
   margin: 0;

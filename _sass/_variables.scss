@@ -25,6 +25,7 @@ $ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 $radius: clamp(0.5rem, 1vw, 0.75rem);
 
 :root {
+  --header-h: 4.5rem;
   --bg: #{$bg};
   --bg-soft: #{$bg-soft};
   --bg-deep: #{$bg-deep};
