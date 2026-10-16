@@ -18,7 +18,19 @@ layout: default
   "image": [
     {{ page.hero_image | absolute_url | jsonify }}{%- assign imgs = page.colorways | map: "image" -%}{%- for img in imgs -%},
     {{ img | absolute_url | jsonify }}{%- endfor -%}
-  ]
+  ]{%- if page.offers %},
+  "offers": [
+    {%- for o in page.offers %}
+    {
+      "@type": "Offer",
+      "name": {{ o.name | jsonify }},
+      "price": {{ o.price | jsonify }},
+      "priceCurrency": {{ o.priceCurrency | default: "IDR" | jsonify }},
+      "availability": {{ o.availability | default: "https://schema.org/PreOrder" | jsonify }},
+      "url": {{ page.url | absolute_url | jsonify }}
+    }{%- unless forloop.last %},{% endunless -%}
+    {%- endfor %}
+  ]{%- endif %}
 }
 </script>
 

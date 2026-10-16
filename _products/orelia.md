@@ -101,6 +101,20 @@ colorways:
     hex2: "#2b2b28"
     image: /assets/img/orelia/orelia-mix-cream-onyx.webp
     alt: Model memakai Orelia mix one set Cream & Onyx.
+# Harga mulai dari (floor price) per jenis. Transaksi lewat agen, bukan di situs.
+offers:
+  - name: Orelia Dress
+    price: 299000
+    priceCurrency: IDR
+    availability: https://schema.org/PreOrder
+  - name: Orelia One Set
+    price: 398000
+    priceCurrency: IDR
+    availability: https://schema.org/PreOrder
+  - name: Orelia Mix One Set
+    price: 330000
+    priceCurrency: IDR
+    availability: https://schema.org/PreOrder
 ---
 
 Orelia adalah seri pakaian muslimah yang kami kembangkan perlahan — satu model
