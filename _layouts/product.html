@@ -52,27 +52,17 @@ layout: default
 
   <div class="wrap product__body">
     {%- if page.colorways %}
-    {%- assign fallback_types = page.colorways | map: "piece" | uniq -%}
-    {%- assign types = page.types | default: fallback_types -%}
-    {%- assign first_type = types | first -%}
-    {%- if types %}
-    <section class="product-block reveal" data-types>
-      <p class="label">Jenis</p>
-      <ul class="type-tabs" aria-label="Jenis">
-        {%- for t in types %}
-        <li>
-          <button class="type-tab{% if forloop.first %} is-active{% endif %}"
-                  type="button" data-type="{{ t }}"
-                  aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ t }}</button>
-        </li>
-        {%- endfor %}
-      </ul>
-    </section>
-    {%- endif %}
-
     {%- assign first = page.colorways | first %}
     <section class="product-block reveal" data-viewer>
-      <p class="label">Warna</p>
+      <div class="viewer__head">
+        <p class="label">Pilihan</p>
+        <button class="group-switch" type="button" data-group-toggle
+                aria-pressed="true"
+                aria-label="Kelompokkan menurut Jenis — tekan untuk Warna">
+          <span class="group-switch__hint">Kelompok</span>
+          <span class="group-switch__key" data-group-label>Jenis</span>
+        </button>
+      </div>
 
       <div class="viewer">
         <button class="viewer__stage" type="button" data-viewer-open
@@ -91,7 +81,7 @@ layout: default
           </p>
           <ul class="viewer__picker">
             {%- for c in page.colorways %}
-            <li data-colorway-item data-piece="{{ c.piece }}"{% if c.piece != first_type %} hidden{% endif %}>
+            <li data-colorway-item data-piece="{{ c.piece }}">
               <button class="picker__btn{% if forloop.first %} is-active{% endif %}"
                       type="button" data-colorway
                       data-name="{{ c.name }}"
@@ -132,9 +122,11 @@ layout: default
         var pieceEl = root.querySelector('[data-viewer-piece]');
         var caption = root.querySelector('.viewer__caption');
 
-        var typesRoot = document.querySelector('[data-types]');
-        var typeTabs = typesRoot ? Array.prototype.slice.call(typesRoot.querySelectorAll('[data-type]')) : [];
         var items = buttons.map(function (b) { return b.closest('[data-colorway-item]'); });
+        var picker = root.querySelector('.viewer__picker');
+        var groupToggle = root.querySelector('[data-group-toggle]');
+        var groupLabel = root.querySelector('[data-group-label]');
+        var grouping = 'jenis';
 
         var lightbox = document.querySelector('[data-lightbox]');
         var lbImg = lightbox && lightbox.querySelector('[data-lightbox-img]');
@@ -192,19 +184,46 @@ layout: default
           select(visible[(pos + dir + visible.length) % visible.length]);
         }
 
-        function applyType(type) {
-          typeTabs.forEach(function (t) {
-            var on = t.getAttribute('data-type') === type;
-            t.classList.toggle('is-active', on);
-            t.setAttribute('aria-pressed', on ? 'true' : 'false');
+        function applyGrouping(key) {
+          grouping = key === 'jenis' ? 'jenis' : 'warna';
+          var isJenis = grouping === 'jenis';
+          if (groupLabel) groupLabel.textContent = isJenis ? 'Jenis' : 'Warna';
+          if (groupToggle) {
+            groupToggle.setAttribute('aria-pressed', isJenis ? 'true' : 'false');
+            groupToggle.setAttribute('aria-label',
+              'Kelompokkan menurut ' + (isJenis ? 'Jenis' : 'Warna') +
+              ' — tekan untuk ' + (isJenis ? 'Warna' : 'Jenis'));
+          }
+          renderGroups();
+        }
+
+        function renderGroups() {
+          if (!picker) return;
+          Array.prototype.slice.call(picker.querySelectorAll('.picker__group')).forEach(function (g) {
+            g.parentNode.removeChild(g);
+          });
+          var order = [];
+          var groups = {};
+          items.forEach(function (li, i) {
+            var b = buttons[i];
+            var byPiece = grouping === 'jenis';
+            var key = byPiece ? b.getAttribute('data-piece') : b.getAttribute('data-name');
+            var label = li.querySelector('.picker__name');
+            if (label) label.textContent = byPiece ? b.getAttribute('data-name') : b.getAttribute('data-piece');
+            if (!groups[key]) { groups[key] = []; order.push(key); }
+            groups[key].push(i);
           });
           visible = [];
-          buttons.forEach(function (b, i) {
-            var on = !type || b.getAttribute('data-piece') === type;
-            if (items[i]) items[i].hidden = !on;
-            if (on) visible.push(i);
+          order.forEach(function (key) {
+            var head = document.createElement('li');
+            head.className = 'picker__group';
+            head.textContent = key;
+            picker.appendChild(head);
+            groups[key].forEach(function (i) {
+              picker.appendChild(items[i]);
+              visible.push(i);
+            });
           });
-          if (visible.length) select(visible[0]);
         }
 
         function openLightbox() {
@@ -231,9 +250,11 @@ layout: default
         buttons.forEach(function (btn, i) {
           btn.addEventListener('click', function () { select(i); });
         });
-        typeTabs.forEach(function (t) {
-          t.addEventListener('click', function () { applyType(t.getAttribute('data-type')); });
-        });
+        if (groupToggle) {
+          groupToggle.addEventListener('click', function () {
+            applyGrouping(grouping === 'warna' ? 'jenis' : 'warna');
+          });
+        }
         root.querySelector('[data-viewer-open]').addEventListener('click', openLightbox);
         if (lightbox) {
           lbClose.addEventListener('click', closeLightbox);
@@ -248,11 +269,8 @@ layout: default
           if (e.key === 'ArrowRight') { step(1); }
         });
 
-        if (typeTabs.length) {
-          applyType(typeTabs[0].getAttribute('data-type'));
-        } else {
-          select(0);
-        }
+        applyGrouping('jenis');
+        select(0);
       })();
     </script>
     {%- endif %}

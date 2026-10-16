@@ -432,31 +432,33 @@ a.contact__card:hover { background: var(--bg-soft); }
   border-top: 1px solid var(--rule);
 }
 
-// ── Jenis tabs ───────────────────────────────────────────────
-.type-tabs {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+// ── Grouping toggle (Warna / Jenis) ──────────────────────────
+.viewer__head {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 2.25rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
 }
 
-.type-tab {
+.viewer__head .label { margin-bottom: 0; }
+
+.group-switch {
   position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
   padding: 0.35rem 0;
   font: inherit;
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-soft);
   background: none;
   border: 0;
   cursor: pointer;
-  transition: color 0.4s $ease;
 }
-.type-tab::after {
+.group-switch::after {
   content: "";
   position: absolute;
   left: 0;
@@ -464,13 +466,17 @@ a.contact__card:hover { background: var(--bg-soft); }
   bottom: 0;
   height: 1px;
   background: var(--ink);
-  transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s $ease;
+  opacity: 0.35;
+  transition: opacity 0.4s $ease;
 }
-.type-tab:hover { color: var(--ink); }
-.type-tab.is-active { color: var(--ink); }
-.type-tab.is-active::after { transform: scaleX(1); }
+.group-switch:hover::after { opacity: 1; }
+.group-switch:focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; }
+.group-switch__hint { color: var(--ink-soft); }
+.group-switch__key {
+  color: var(--ink);
+  transition: color 0.4s $ease;
+}
 
 // Pulse the selected colourway dot.
 @keyframes swatch-zoom {
@@ -562,8 +568,17 @@ a.contact__card:hover { background: var(--bg-soft); }
   counter-reset: colorway;
 }
 .viewer__picker li { border-top: 1px solid var(--rule); }
+.viewer__picker li:first-child { border-top: 0; }
 .viewer__picker li:last-child { border-bottom: 1px solid var(--rule); }
-.viewer__picker li[hidden] { display: none; }
+
+.viewer__picker li.picker__group {
+  padding: 1.1rem 0 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
 
 .picker__btn {
   display: flex;
