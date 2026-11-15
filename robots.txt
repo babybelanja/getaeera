@@ -2,4 +2,20 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
+# Email harvesters — tolak pengumpul alamat surel.
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+User-agent: ExtractorPro
+Disallow: /
+
+User-agent: CherryPicker
+Disallow: /
+
 Sitemap: https://getaeera.id/sitemap.xml

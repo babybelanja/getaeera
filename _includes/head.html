@@ -30,7 +30,6 @@
     "description": {{ site.description | jsonify }},
     "logo": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
     "image": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
-    "email": {{ site.data.site.contact.email | jsonify }},
     "address": {
       "@type": "PostalAddress",
       "addressLocality": {{ site.data.site.umbrella.city | jsonify }},

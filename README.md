@@ -60,6 +60,12 @@ Push ke branch `main` memicu workflow GitHub Actions untuk build dengan
 ## Catatan
 
 - `opencode.json` bersifat lokal dan tidak diikutsertakan (lihat `.gitignore`).
+- **Email jangan ditulis langsung di HTML.** Pakai `{% include email.html %}`
+  (tautan lengkap) atau `{% include email-text.html %}` (teks saja). Keduanya
+  meng-encode `@` dan `.` sebagai entitas sehingga alamat tidak muncul utuh di
+  sumber. Sumber kebenaran tetap `contact.email` di `_data/site.yml`; alamat juga
+  sengaja tidak dimasukkan ke JSON-LD. `robots.txt` memblokir harvester surel
+  lama (EmailCollector, EmailSiphon, dll.).
 - `Gemfile.lock` di-commit agar build Actions reprodusibel.
 - `jekyll_picture_tag` sengaja belum dipakai di fase 1 (butuh lib native di CI);
   ditambahkan saat fotografi asli siap (fase 2).

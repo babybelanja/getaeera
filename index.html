@@ -179,9 +179,9 @@ hero_image: /assets/img/slides/slide-01.webp
         <span class="contact__val">Temukan agen terdekat</span>
         <span class="contact__sub">116 agen di 59 kota</span>
       </a>
-      <a class="contact__card reveal" href="mailto:{{ site.data.site.contact.email }}">
+      <a class="contact__card reveal" rel="nofollow" href="mailto:{% include email-text.html %}">
         <p class="label">Email</p>
-        <span class="contact__val">{{ site.data.site.contact.email }}</span>
+        <span class="contact__val">{% include email-text.html %}</span>
         <span class="contact__sub">Kemitraan &amp; pertanyaan umum</span>
       </a>
     </div>

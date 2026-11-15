@@ -1,0 +1,2 @@
+{%- assign _addr = include.email | default: site.data.site.contact.email -%}
+{{- _addr | replace: '@', '&#64;' | replace: '.', '&#46;' -}}

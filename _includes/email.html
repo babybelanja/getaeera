@@ -1,0 +1,11 @@
+{%- assign _addr = include.email | default: site.data.site.contact.email -%}
+{%- assign _href = 'mailto:' | append: _addr | replace: '@', '&#64;' | replace: '.', '&#46;' -%}
+{%- if include.subject -%}
+{%- assign _subject = include.subject | url_encode -%}
+{%- assign _href = _href | append: '?subject=' | append: _subject -%}
+{%- endif -%}
+{%- assign _text = include.text | default: _addr -%}
+{%- assign _text_obf = _text | replace: '@', '&#64;' | replace: '.', '&#46;' -%}
+<a class="js-email{% if include.class %} {{ include.class }}{% endif %}"
+   rel="nofollow"
+   href="{{ _href }}">{{ _text_obf }}</a>
