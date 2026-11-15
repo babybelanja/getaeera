@@ -50,6 +50,16 @@
   }
   a:hover,
   a[aria-current="page"] { color: var(--ink); }
+
+  .nav-soldout {
+    margin-left: 0.35rem;
+    font-family: $font-display;
+    font-style: italic;
+    font-size: 0.72rem;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    opacity: 0.6;
+  }
 }
 
 .nav-toggle {
@@ -438,11 +448,24 @@ a.contact__card:hover { background: var(--bg-deep); }
 .product-hero__inner .display { margin-bottom: 1.5rem; }
 
 .product-hero__media {
+  position: relative;
   margin: clamp(2.5rem, 7vw, 5rem) auto 0;
   max-width: $maxw;
   padding-inline: $gutter;
 
   img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: $radius; }
+}
+
+.soldout-badge {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  right: calc(#{$gutter} + clamp(1rem, 2.5vw, 1.5rem));
+  width: clamp(8rem, 24vw, 12.5rem);
+  line-height: 0;
+  filter: drop-shadow(0 6px 20px rgba($ink, 0.3));
+  pointer-events: none;
+
+  svg { display: block; width: 100%; height: auto; }
 }
 
 .product__body { padding-block: $section-y; }

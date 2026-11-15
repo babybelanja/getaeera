@@ -10,7 +10,8 @@
 
     <nav class="site-nav" id="navLinks" aria-label="Utama">
       {%- for item in site.data.site.nav %}
-      <a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener"{% elsif page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {%- assign _nav_product = site.products | where: "url", item.url | first %}
+      <a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener"{% elsif page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}{% if _nav_product.sold_out %} <span class="nav-soldout">Sold out</span>{% endif %}</a>
       {%- endfor %}
     </nav>
   </div>

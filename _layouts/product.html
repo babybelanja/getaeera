@@ -46,6 +46,24 @@ layout: default
       <img src="{{ page.hero_image | relative_url }}"
            alt="{{ page.hero_alt | default: page.title }}"
            width="1920" height="1080" loading="eager" />
+      {%- if page.sold_out %}
+      <span class="soldout-badge" role="img" aria-label="Habis — seluruh seri terjual">
+        <svg viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <rect x="1.5" y="1.5" width="417" height="97" rx="48.5"
+                fill="#6f1a1c" stroke="#f4f0e8" stroke-width="1.2"/>
+          <rect x="10" y="10" width="400" height="80" rx="40"
+                fill="none" stroke="#f4f0e8" stroke-width="1.5" opacity="0.7"/>
+          <line x1="40" y1="50" x2="84" y2="50"
+                stroke="#f4f0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+          <line x1="336" y1="50" x2="380" y2="50"
+                stroke="#f4f0e8" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+          <text x="210" y="52" fill="#f4f0e8"
+                font-family="Fraunces, Georgia, 'Times New Roman', serif"
+                font-size="40" font-weight="500" letter-spacing="6"
+                text-anchor="middle" dominant-baseline="central">SOLD OUT</text>
+        </svg>
+      </span>
+      {%- endif %}
     </figure>
     {%- endif %}
   </header>
@@ -299,9 +317,19 @@ layout: default
 
   <section class="cta-band">
     <div class="wrap cta-band__inner reveal">
+      {%- if page.sold_out %}
+      <p class="label">Habis</p>
+      <h2 class="display-sm">Seri ini telah habis.</h2>
+      {%- assign _restock_subject = 'Kabar restock ' | append: page.title -%}
+      {% include email.html
+         class='link-underline'
+         subject=_restock_subject
+         text='Beri tahu saya saat tersedia &rarr;' %}
+      {%- else %}
       <p class="label">Tertarik</p>
       <h2 class="display-sm">Tanya atau pesan lewat agen terdekat.</h2>
       <a class="link-underline" href="{{ '/reseller/' | relative_url }}">Temukan agen terdekat &rarr;</a>
+      {%- endif %}
     </div>
   </section>
 </article>

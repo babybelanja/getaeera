@@ -8,6 +8,7 @@ hero_image: /assets/img/slides/slide-01.webp
 hero_alt: Tiga model memakai koleksi Orelia seri Onyx
 image: /assets/img/og-image.jpg
 size_chart: orelia
+sold_out: true
 # Jenis — urutan tab "Jenis"; tiap colorway ditandai lewat `piece`.
 types:
   - Dress
@@ -106,15 +107,15 @@ offers:
   - name: Orelia Dress
     price: 299000
     priceCurrency: IDR
-    availability: https://schema.org/PreOrder
+    availability: https://schema.org/SoldOut
   - name: Orelia One Set
     price: 398000
     priceCurrency: IDR
-    availability: https://schema.org/PreOrder
+    availability: https://schema.org/SoldOut
   - name: Orelia Mix One Set
     price: 330000
     priceCurrency: IDR
-    availability: https://schema.org/PreOrder
+    availability: https://schema.org/SoldOut
 ---
 
 Orelia adalah seri pakaian muslimah yang kami kembangkan perlahan — satu model
