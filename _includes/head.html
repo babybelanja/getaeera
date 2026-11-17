@@ -28,8 +28,18 @@
     "name": {{ site.title | jsonify }},
     "url": {{ site.url | append: '/' | jsonify }},
     "description": {{ site.description | jsonify }},
-    "logo": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+    "logo": {{ '/assets/img/logo-512.png' | absolute_url | jsonify }},
     "image": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+    {%- assign _wa = site.data.site.contact.whatsapp -%}
+    {%- if _wa and _wa != "" and _wa != "6281234567890" -%}
+    {%- assign _tel = _wa -%}{%- unless _tel contains '+' -%}{%- assign _tel = _tel | prepend: '+' -%}{%- endunless -%}
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "telephone": {{ _tel | jsonify }},
+      "areaServed": "ID"
+    },
+    {%- endif -%}
     "address": {
       "@type": "PostalAddress",
       "addressLocality": {{ site.data.site.umbrella.city | jsonify }},
@@ -42,8 +52,21 @@
       "url": {{ site.data.site.umbrella.url | jsonify }}
     },
     "sameAs": [
-      {{ site.data.site.social.instagram | jsonify }}
+      {{ site.data.site.social.instagram | jsonify }}{% if site.data.site.social.facebook %},
+      {{ site.data.site.social.facebook | jsonify }}{% endif %}
     ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": {{ site.url | append: '/#website' | jsonify }},
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | append: '/' | jsonify }},
+    "inLanguage": {{ site.lang | default: 'id' | jsonify }},
+    "publisher": { "@id": {{ site.url | append: '/#organization' | jsonify }} }
   }
   </script>
 

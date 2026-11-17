@@ -105,14 +105,17 @@ colorways:
 # Harga mulai dari (floor price) per jenis. Transaksi lewat agen, bukan di situs.
 offers:
   - name: Orelia Dress
+    sku: AE-ORL-DRESS
     price: 299000
     priceCurrency: IDR
     availability: https://schema.org/SoldOut
   - name: Orelia One Set
+    sku: AE-ORL-ONESET
     price: 398000
     priceCurrency: IDR
     availability: https://schema.org/SoldOut
   - name: Orelia Mix One Set
+    sku: AE-ORL-MIX
     price: 330000
     priceCurrency: IDR
     availability: https://schema.org/SoldOut

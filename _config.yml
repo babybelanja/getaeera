@@ -30,11 +30,15 @@ defaults:
       type: "products"
     values:
       layout: "product"
+      seo:
+        type: "ItemPage"
   - scope:
       path: ""
       type: "brands"
     values:
       layout: "brand"
+      seo:
+        type: "AboutPage"
   - scope:
       path: ""
       type: "pages"

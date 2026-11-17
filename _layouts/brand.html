@@ -11,7 +11,7 @@ layout: default
   "slogan": {{ page.tagline | jsonify }},
   "description": {{ page.description | default: site.description | jsonify }},
   "url": {{ page.url | absolute_url | jsonify }},
-  "logo": {{ '/assets/img/og-image.jpg' | absolute_url | jsonify }},
+  "logo": {{ '/assets/img/logo-512.png' | absolute_url | jsonify }},
   "parentOrganization": {
     "@type": "Organization",
     "name": {{ site.data.site.umbrella.name | jsonify }},
@@ -20,9 +20,36 @@ layout: default
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": {{ '/' | absolute_url | jsonify }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | jsonify }},
+      "item": {{ page.url | absolute_url | jsonify }}
+    }
+  ]
+}
+</script>
+
 <article class="brand">
   <header class="brand-hero">
     <div class="wrap brand-hero__inner reveal">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ '/' | relative_url }}">Beranda</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
       <p class="label">{{ brand.role | default: "Merek" }}</p>
       <h1 class="display">{{ page.title }}</h1>
       {%- if page.tagline %}

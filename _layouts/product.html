@@ -15,6 +15,7 @@ layout: default
     "@type": "Brand",
     "name": {{ site.title | jsonify }}
   },
+  "itemCondition": "https://schema.org/NewCondition",
   "image": [
     {{ page.hero_image | absolute_url | jsonify }}{%- assign imgs = page.colorways | map: "image" -%}{%- for img in imgs -%},
     {{ img | absolute_url | jsonify }}{%- endfor -%}
@@ -24,6 +25,9 @@ layout: default
     {
       "@type": "Offer",
       "name": {{ o.name | jsonify }},
+      {%- if o.sku %}
+      "sku": {{ o.sku | jsonify }},
+      {%- endif %}
       "price": {{ o.price | jsonify }},
       "priceCurrency": {{ o.priceCurrency | default: "IDR" | jsonify }},
       "availability": {{ o.availability | default: "https://schema.org/PreOrder" | jsonify }},
@@ -34,9 +38,36 @@ layout: default
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": {{ '/' | absolute_url | jsonify }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | jsonify }},
+      "item": {{ page.url | absolute_url | jsonify }}
+    }
+  ]
+}
+</script>
+
 <article class="product">
   <header class="product-hero">
     <div class="wrap product-hero__inner reveal">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ '/' | relative_url }}">Beranda</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
       {%- if page.series %}<p class="label">{{ page.series }}</p>{% endif %}
       <h1 class="display display-sm">{{ page.title }}</h1>
       {%- if page.tagline %}<p class="lead">{{ page.tagline }}</p>{% endif %}
